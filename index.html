@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MONEYTRACK PRO</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       LOGIN SCREEN
+  ========================== -->
+
+  <div id="authScreen" class="auth-screen">
+
+    <div class="auth-box">
+
+      <div class="auth-logo">
+        M
+      </div>
+
+      <div class="auth-brand">
+        <h1>MONEY<span>TRACK</span></h1>
+        <p>PERSONAL FINANCE SYSTEM</p>
+      </div>
+
+      <!-- LOGIN -->
+
+      <div id="loginFormBox">
+
+        <div class="auth-heading">
+          <h2>Welcome Back</h2>
+          <p>Masuk ke dashboard keuangan kamu.</p>
+        </div>
+
+        <form id="loginForm">
+
+          <div class="form-group">
+            <label>Username</label>
+
+            <input
+              type="text"
+              id="loginUsername"
+              placeholder="Masukkan username"
+              autocomplete="username"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Masukkan password"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+
+          <button class="auth-button" type="submit">
+            MASUK
+          </button>
+
+        </form>
+
+        <p class="switch-auth">
+          Belum punya akun?
+          <button type="button" onclick="showRegister()">
+            Register
+          </button>
+        </p>
+
+      </div>
+
+
+      <!-- REGISTER -->
+
+      <div id="registerFormBox" class="hidden">
+
+        <div class="auth-heading">
+          <h2>Create Account</h2>
+          <p>Buat akun MONEYTRACK kamu.</p>
+        </div>
+
+        <form id="registerForm">
+
+          <div class="form-group">
+            <label>Nama</label>
+
+            <input
+              type="text"
+              id="registerName"
+              placeholder="Nama kamu"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Username</label>
+
+            <input
+              type="text"
+              id="registerUsername"
+              placeholder="Username"
+              autocomplete="username"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+
+            <input
+              type="password"
+              id="registerPassword"
+              placeholder="Minimal 6 karakter"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Konfirmasi Password</label>
+
+            <input
+              type="password"
+              id="registerConfirmPassword"
+              placeholder="Ulangi password"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+
+          <button class="auth-button" type="submit">
+            BUAT AKUN
+          </button>
+
+        </form>
+
+        <p class="switch-auth">
+          Sudah punya akun?
+          <button type="button" onclick="showLogin()">
+            Login
+          </button>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       MAIN APP
+  ========================== -->
+
+  <div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+      <div class="brand">
+
+        <div class="brand-logo">
+          M
+        </div>
+
+        <div>
+          <h2>MONEY<span>TRACK</span></h2>
+          <small>PRO EDITION</small>
+        </div>
+
+      </div>
+
+
+      <nav class="navigation">
+
+        <a href="#dashboard" class="nav-item active">
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#transactions" class="nav-item">
+          <span class="nav-icon">↔</span>
+          <span>Transactions</span>
+        </a>
+
+        <a href="#analytics" class="nav-item">
+          <span class="nav-icon">◒</span>
+          <span>Analytics</span>
+        </a>
+
+        <a href="#budget" class="nav-item">
+          <span class="nav-icon">▣</span>
+          <span>Budget</span>
+        </a>
+
+        <a href="#goals" class="nav-item">
+          <span class="nav-icon">◇</span>
+          <span>Goals</span>
+        </a>
+
+        <a href="#settings" class="nav-item">
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+
+      </nav>
+
+
+      <div class="sidebar-footer">
+
+        <div class="system-card">
+
+          <div class="system-top">
+            <span class="online"></span>
+            SYSTEM ONLINE
+          </div>
+
+          <p>
+            Local data storage active.
+          </p>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div>
+
+          <p class="eyebrow">
+            PERSONAL FINANCE
+          </p>
+
+          <h1 class="page-title">
+            Dashboard
+          </h1>
+
+        </div>
+
+
+        <div class="topbar-actions">
+
+          <div class="user-profile">
+
+            <div class="avatar" id="avatar">
+              I
+            </div>
+
+            <div class="user-info">
+
+              <span id="userName">
+                Isal
+              </span>
+
+              <small>
+                Personal Account
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="add-button"
+            onclick="openTransactionModal()"
+          >
+            + Transaksi
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           DASHBOARD
+      ========================== -->
+
+      <section id="dashboard" class="page-section">
+
+
+        <!-- BALANCE -->
+
+        <div class="balance-card">
+
+          <div class="balance-content">
+
+            <p class="eyebrow">
+              TOTAL BALANCE
+            </p>
+
+            <h2 id="balance">
+              Rp0
+            </h2>
+
+            <p class="balance-note">
+              Keuangan kamu dalam satu dashboard.
+            </p>
+
+          </div>
+
+
+          <div class="balance-decoration">
+
+            <div class="dec-circle circle-one"></div>
+            <div class="dec-circle circle-two"></div>
+            <div class="dec-circle circle-three"></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-header">
+              <span>Pemasukan</span>
+
+              <div class="stat-icon income-icon">
+                ↗
+              </div>
+            </div>
+
+            <h3 id="income">
+              Rp0
+            </h3>
+
+            <p>Total pemasukan</p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-header">
+              <span>Pengeluaran</span>
+
+              <div class="stat-icon expense-icon">
+                ↘
+              </div>
+            </div>
+
+            <h3 id="expense">
+              Rp0
+            </h3>
+
+            <p>Total pengeluaran</p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-header">
+              <span>Transaksi</span>
+
+              <div class="stat-icon transaction-icon">
+                #
+              </div>
+            </div>
+
+            <h3 id="transactionCount">
+              0
+            </h3>
+
+            <p>Total transaksi</p>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-header">
+              <span>Saving Rate</span>
+
+              <div class="stat-icon saving-icon">
+                %
+              </div>
+            </div>
+
+            <h3 id="savingRate">
+              0%
+            </h3>
+
+            <p>Rasio uang tersimpan</p>
+
+          </div>
+
+        </div>
+
+
+        <!-- CHART + QUICK ACTION -->
+
+        <div class="dashboard-grid">
+
+
+          <div class="panel chart-panel">
+
+            <div class="panel-header">
+
+              <div>
+                <h2>Cash Flow</h2>
+                <p>Pergerakan keuangan</p>
+              </div>
+
+              <select id="chartPeriod">
+
+                <option value="7">
+                  7 Hari
+                </option>
+
+                <option value="14">
+                  14 Hari
+                </option>
+
+                <option value="30" selected>
+                  30 Hari
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="chart-area">
+
+              <canvas id="cashFlowChart"></canvas>
+
+              <div id="chartEmpty" class="chart-empty">
+                Belum ada data transaksi.
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel quick-panel">
+
+            <div class="panel-header">
+
+              <div>
+                <h2>Quick Actions</h2>
+                <p>Akses cepat</p>
+              </div>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+              <button
+                class="quick-action income-action"
+                onclick="openTransactionModal('income')"
+              >
+                <span>↗</span>
+                <strong>Pemasukan</strong>
+              </button>
+
+
+              <button
+                class="quick-action expense-action"
+                onclick="openTransactionModal('expense')"
+              >
+                <span>↘</span>
+                <strong>Pengeluaran</strong>
+              </button>
+
+
+              <button
+                class="quick-action"
+                onclick="scrollToGoals()"
+              >
+                <span>◇</span>
+                <strong>Target</strong>
+              </button>
+
+
+              <button
+                class="quick-action"
+                onclick="exportCSV()"
+              >
+                <span>↓</span>
+                <strong>Export</strong>
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- TRANSACTIONS -->
+
+        <div
+          class="panel transactions-panel"
+          id="transactions"
+        >
+
+          <div class="panel-header transaction-header">
+
+            <div>
+              <h2>Recent Transactions</h2>
+              <p>Riwayat keuangan terbaru</p>
+            </div>
+
+            <button
+              class="view-all"
+              onclick="showAllTransactionsHandler()"
+            >
+              Lihat Semua →
+            </button>
+
+          </div>
+
+
+          <div class="transaction-tools">
+
+            <div class="search-box">
+
+              <span>⌕</span>
+
+              <input
+                type="text"
+                id="searchTransaction"
+                placeholder="Cari transaksi..."
+              >
+
+            </div>
+
+
+            <select id="filterType">
+
+              <option value="all">
+                Semua Tipe
+              </option>
+
+              <option value="income">
+                Pemasukan
+              </option>
+
+              <option value="expense">
+                Pengeluaran
+              </option>
+
+            </select>
+
+
+            <select id="filterCategory">
+
+              <option value="all">
+                Semua Kategori
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            id="transactionList"
+            class="transaction-list"
+          ></div>
+
+
+          <div
+            id="emptyTransactions"
+            class="empty-state"
+          >
+
+            <div class="empty-icon">
+              ◌
+            </div>
+
+            <h3>
+              Belum ada transaksi
+            </h3>
+
+            <p>
+              Tambahkan transaksi pertama kamu.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           ANALYTICS
+      ========================== -->
+
+      <section
+        id="analytics"
+        class="page-section secondary-section"
+      >
+
+        <div class="section-heading">
+
+          <p class="eyebrow">
+            INSIGHTS
+          </p>
+
+          <h2>Analytics</h2>
+
+          <p>
+            Analisis kebiasaan keuangan kamu.
+          </p>
+
+        </div>
+
+
+        <div class="analytics-grid">
+
+          <div class="analytics-card">
+
+            <p>
+              Top Expense Category
+            </p>
+
+            <h3 id="topExpenseCategory">
+              -
+            </h3>
+
+            <small>
+              Kategori pengeluaran terbesar
+            </small>
+
+          </div>
+
+
+          <div class="analytics-card">
+
+            <p>
+              Average Expense
+            </p>
+
+            <h3 id="averageExpense">
+              Rp0
+            </h3>
+
+            <small>
+              Rata-rata setiap transaksi
+            </small>
+
+          </div>
+
+
+          <div class="analytics-card">
+
+            <p>
+              Largest Expense
+            </p>
+
+            <h3 id="largestExpense">
+              Rp0
+            </h3>
+
+            <small>
+              Pengeluaran terbesar
+            </small>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           BUDGET
+      ========================== -->
+
+      <section
+        id="budget"
+        class="page-section secondary-section"
+      >
+
+        <div class="section-heading">
+
+          <p class="eyebrow">
+            MONEY CONTROL
+          </p>
+
+          <h2>Monthly Budget</h2>
+
+          <p>
+            Atur batas pengeluaran bulanan kamu.
+          </p>
+
+        </div>
+
+
+        <div class="panel budget-panel">
+
+          <div class="budget-top">
+
+            <div>
+
+              <p>
+                Budget Bulanan
+              </p>
+
+              <h3 id="budgetAmount">
+                Rp0
+              </h3>
+
+            </div>
+
+            <button
+              class="add-small"
+              onclick="setBudget()"
+            >
+              Atur Budget
+            </button>
+
+          </div>
+
+
+          <div class="budget-progress">
+
+            <div
+              id="budgetProgressBar"
+              class="budget-progress-bar"
+            ></div>
+
+          </div>
+
+
+          <div class="budget-info">
+
+            <span id="budgetUsed">
+              Terpakai Rp0
+            </span>
+
+            <strong id="budgetRemaining">
+              Sisa Rp0
+            </strong>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           GOALS
+      ========================== -->
+
+      <section
+        id="goals"
+        class="page-section secondary-section"
+      >
+
+        <div class="section-heading goal-heading">
+
+          <div>
+
+            <p class="eyebrow">
+              FUTURE
+            </p>
+
+            <h2>Saving Goals</h2>
+
+            <p>
+              Bangun target finansial kamu.
+            </p>
+
+          </div>
+
+
+          <button
+            class="add-small"
+            onclick="openGoalModal()"
+          >
+            + New Goal
+          </button>
+
+        </div>
+
+
+        <div
+          id="goalsList"
+          class="goals-grid"
+        ></div>
+
+      </section>
+
+
+      <!-- =========================
+           SETTINGS
+      ========================== -->
+
+      <section
+        id="settings"
+        class="page-section secondary-section"
+      >
+
+        <div class="section-heading">
+
+          <p class="eyebrow">
+            CONFIGURATION
+          </p>
+
+          <h2>Settings</h2>
+
+          <p>
+            Atur akun dan data MONEYTRACK.
+          </p>
+
+        </div>
+
+
+        <div class="panel settings-panel">
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <h3>
+                Nama Akun
+              </h3>
+
+              <p>
+                Nama yang tampil di dashboard.
+              </p>
+
+            </div>
+
+
+            <div class="setting-control">
+
+              <input
+                type="text"
+                id="accountName"
+                placeholder="Nama kamu"
+              >
+
+              <button
+                class="add-small"
+                onclick="saveAccountName()"
+              >
+                Simpan
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <h3>
+                Penyimpanan
+              </h3>
+
+              <p>
+                Data disimpan di browser perangkat ini.
+              </p>
+
+            </div>
+
+            <span class="storage-status">
+              ● ACTIVE
+            </span>
+
+          </div>
+
+
+          <div class="setting-row">
+
+            <div>
+
+              <h3>
+                Account
+              </h3>
+
+              <p>
+                Keluar dari akun MONEYTRACK.
+              </p>
+
+            </div>
+
+            <button
+              class="danger-button"
+              onclick="logout()"
+            >
+              Logout
+            </button>
+
+          </div>
+
+
+          <div class="setting-row danger-row">
+
+            <div>
+
+              <h3>
+                Reset Data
+              </h3>
+
+              <p>
+                Hapus seluruh transaksi, goals, dan budget.
+              </p>
+
+            </div>
+
+            <button
+              class="danger-button"
+              onclick="resetAllData()"
+            >
+              Reset Semua
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================
+       TRANSACTION MODAL
+  ========================== -->
+
+  <div
+    id="transactionModal"
+    class="modal-overlay"
+  >
+
+    <div class="modal">
+
+      <button
+        class="close-modal"
+        onclick="closeTransactionModal()"
+      >
+        ×
+      </button>
+
+
+      <h2>
+        Tambah Transaksi
+      </h2>
+
+      <p class="modal-subtitle">
+        Catat pemasukan atau pengeluaran kamu.
+      </p>
+
+
+      <form id="transactionForm">
+
+        <div class="type-buttons">
+
+          <button
+            type="button"
+            class="type-btn income-type active"
+            onclick="selectTransactionType('income')"
+          >
+            ↗ Pemasukan
+          </button>
+
+          <button
+            type="button"
+            class="type-btn expense-type"
+            onclick="selectTransactionType('expense')"
+          >
+            ↘ Pengeluaran
+          </button>
+
+        </div>
+
+
+        <input
+          type="hidden"
+          id="transactionType"
+          value="income"
+        >
+
+
+        <div>
+
+          <label>
+            Deskripsi
+          </label>
+
+          <input
+            type="text"
+            id="transactionDescription"
+            placeholder="Contoh: Gaji, Jajan, Freelance"
+            required
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Nominal
+          </label>
+
+          <input
+            type="number"
+            id="transactionAmount"
+            class="amount-input"
+            placeholder="50000"
+            min="1"
+            required
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Kategori
+          </label>
+
+          <select id="transactionCategory">
+
+            <option value="Gaji">
+              Gaji
+            </option>
+
+            <option value="Freelance">
+              Freelance
+            </option>
+
+            <option value="Bisnis">
+              Bisnis
+            </option>
+
+            <option value="Investasi">
+              Investasi
+            </option>
+
+            <option value="Makanan">
+              Makanan
+            </option>
+
+            <option value="Transportasi">
+              Transportasi
+            </option>
+
+            <option value="Belanja">
+              Belanja
+            </option>
+
+            <option value="Hiburan">
+              Hiburan
+            </option>
+
+            <option value="Tagihan">
+              Tagihan
+            </option>
+
+            <option value="Lainnya">
+              Lainnya
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Tanggal
+          </label>
+
+          <input
+            type="date"
+            id="transactionDate"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="save-button"
+        >
+          Simpan Transaksi
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       GOAL MODAL
+  ========================== -->
+
+  <div
+    id="goalModal"
+    class="modal-overlay"
+  >
+
+    <div class="modal">
+
+      <button
+        class="close-modal"
+        onclick="closeGoalModal()"
+      >
+        ×
+      </button>
+
+
+      <h2>
+        New Saving Goal
+      </h2>
+
+      <p class="modal-subtitle">
+        Buat target keuangan baru.
+      </p>
+
+
+      <form id="goalForm">
+
+        <div>
+
+          <label>
+            Nama Target
+          </label>
+
+          <input
+            type="text"
+            id="goalName"
+            placeholder="Contoh: Laptop Baru"
+            required
+          >
+
+        </div>
+
+
+        <div>
+
+          <label>
+            Target Nominal
+          </label>
+
+          <input
+            type="number"
+            id="goalAmount"
+            class="amount-input"
+            placeholder="10000000"
+            min="1"
+            required
+          >
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="save-button"
+        >
+          Buat Target
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
